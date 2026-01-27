@@ -27,7 +27,7 @@ pipeline {
 		'''
             }
         }
-        stage('achive') {
+        stage('archive') {
             steps {
                 echo 'archiving'
 		archiveArtifacts artifacts:"build/libs/**/*.jar", fingerprint:true
