@@ -18,7 +18,13 @@ jobs:
         uses: gradle/actions/setup-gradle@v5
       - name: Build with Gradle
         run: ./gradlew build
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v6.0.0
+        with:
+          path: build/libs/*.jar
+          retention-days: 1
       
+
 
 
 
