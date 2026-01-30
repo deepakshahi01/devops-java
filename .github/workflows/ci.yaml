@@ -21,9 +21,32 @@ jobs:
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v6.0.0
         with:
+          name: javaapp.jar
           path: build/libs/*.jar
           retention-days: 1
+  deploy-on-aws:
+      needs: build-java-artifacts
+      runs-on: ubuntu-latest
+      steps:
+        - name: download jar-file
+          uses: actions/download-artifact@v7.0.0
+          with:
+            name: javapp.jar
+            path: java-app
+        - name: list contents of dist folder
+          run: ls -al
+        - name: dump secrets to a file
+          run: echo "${{ secrets.SSH_KEY }}" > devops-tos.pem
+        - name: list contents of devops-tos and set permissions
+          run: cat devops-tos.pem && chmod 400 devops-tos.pem
+        - name: login to aws server
+          run: ssh -o StrictHostKeyChecking=no -i devops-tos.pem ${{ vars.SSH_USER }}@${{ vars.SERVER_IP }} ls 
+          run: ssh -o StrictHostKeyChecking=no -i devops-tos.pem ${{ vars.SSH_USER }}@${{ vars.SERVER_IP }} ls
+        - name: copy dist folder to aws server
+          run: scp -i devops-tos.pem -rv dist/* ${{ vars.SSH_USER }}@${{ vars.SERVER_IP }}:/var/www/html/deepak
+        
       
+
 
 
 
