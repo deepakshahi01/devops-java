@@ -41,11 +41,11 @@ jobs:
           run: cat devops-tos.pem && chmod 400 devops-tos.pem
         - name: login to aws server
           run: ssh -o StrictHostKeyChecking=no -i devops-tos.pem ${{ vars.SSH_USER }}@${{ vars.SERVER_IP }} ls 
-          run: ssh -o StrictHostKeyChecking=no -i devops-tos.pem ${{ vars.SSH_USER }}@${{ vars.SERVER_IP }} ls
         - name: copy dist folder to aws server
           run: scp -i devops-tos.pem -rv dist/* ${{ vars.SSH_USER }}@${{ vars.SERVER_IP }}:/var/www/html/deepak
         
       
+
 
 
 
