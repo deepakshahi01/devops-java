@@ -50,11 +50,12 @@ jobs:
           run: scp -i devops-tos.pem java-app/* ${{ vars.SSH_USER }}@${{ vars.SERVER_IP }}:/home/ubuntu/deepak
         - name: run the application
           run: |
-               ssh -o StrictHostKeyChecking=no -i devops-tos.pem ${{ vars.SSH_USER }}@${{ vars.SERVER_IP }} << "ENDSSH'
+               ssh -o StrictHostKeyChecking=no -i devops-tos.pem ${{ vars.SSH_USER }}@${{ vars.SERVER_IP }} << 'ENDSSH'
                java -jar /home/ubuntu/deepak/calculator-1.0.0.jar
                ENDSSH
         
       
+
 
 
 
