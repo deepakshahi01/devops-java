@@ -31,7 +31,7 @@ jobs:
         - name: download jar-file
           uses: actions/download-artifact@v7.0.0
           with:
-            name: javapp.jar
+            name: javaapp.jar
             path: java-app
         - name: list contents of dist folder
           run: ls -al
@@ -45,6 +45,7 @@ jobs:
           run: scp -i devops-tos.pem -rv dist/* ${{ vars.SSH_USER }}@${{ vars.SERVER_IP }}:/var/www/html/deepak
         
       
+
 
 
 
