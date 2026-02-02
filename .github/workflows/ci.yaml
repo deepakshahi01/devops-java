@@ -40,7 +40,7 @@ jobs:
         - name: list contents of devops-tos and set permissions
           run: cat devops-tos.pem && chmod 400 devops-tos.pem
         - name: login to aws server
-          run: ssh -o StrictHostKeyChecking=no -i devops-tos.pem ${{ vars.SSH_USER }}@${{ vars.SERVER_IP }} >> 'ENDSSH'
+          run: ssh -o StrictHostKeyChecking=no -i devops-tos.pem ${{ vars.SSH_USER }}@${{ vars.SERVER_IP }} << 'ENDSSH'
               ls
               if[ ! -d /home/ubuntu/deepak ]; then
                 mkdir /home/ubuntu/deepak
@@ -50,6 +50,7 @@ jobs:
           run: scp -i devops-tos.pem -rv dist/* ${{ vars.SSH_USER }}@${{ vars.SERVER_IP }}:/home/ubuntu/deepak
         
       
+
 
 
 
